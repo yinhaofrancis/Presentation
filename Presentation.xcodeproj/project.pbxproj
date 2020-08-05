@@ -17,6 +17,8 @@
 		A91B3CFB24D6F3E300097C0D /* lol.xib in Resources */ = {isa = PBXBuildFile; fileRef = A91B3CFA24D6F3E300097C0D /* lol.xib */; };
 		A91B3CFD24D9B4CB00097C0D /* DialogTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91B3CFC24D9B4CB00097C0D /* DialogTransaction.swift */; };
 		A91B3CFF24D9CDA100097C0D /* MVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91B3CFE24D9CDA100097C0D /* MVViewController.swift */; };
+		A9E50AE524DA697E00719812 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9E50AE424DA697C00719812 /* iconfont.ttf */; };
+		A9E50AE724DA6A9500719812 /* PresentIconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E50AE624DA6A9500719812 /* PresentIconFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		A91B3CFA24D6F3E300097C0D /* lol.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = lol.xib; sourceTree = "<group>"; };
 		A91B3CFC24D9B4CB00097C0D /* DialogTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogTransaction.swift; sourceTree = "<group>"; };
 		A91B3CFE24D9CDA100097C0D /* MVViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVViewController.swift; sourceTree = "<group>"; };
+		A9E50AE424DA697C00719812 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
+		A9E50AE624DA6A9500719812 /* PresentIconFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentIconFont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 				A91B3CE224D4817900097C0D /* AppDelegate.swift */,
 				A91B3CE624D4817900097C0D /* ViewController.swift */,
 				A91B3CE824D4817900097C0D /* Main.storyboard */,
+				A9E50AE624DA6A9500719812 /* PresentIconFont.swift */,
+				A9E50AE424DA697C00719812 /* iconfont.ttf */,
 				A91B3CFE24D9CDA100097C0D /* MVViewController.swift */,
 				A91B3CF624D481BE00097C0D /* DialogPresentation.swift */,
 				A91B3CFC24D9B4CB00097C0D /* DialogTransaction.swift */,
@@ -140,6 +146,7 @@
 				A91B3CEF24D4817A00097C0D /* LaunchScreen.storyboard in Resources */,
 				A91B3CEC24D4817A00097C0D /* Assets.xcassets in Resources */,
 				A91B3CEA24D4817900097C0D /* Main.storyboard in Resources */,
+				A9E50AE524DA697E00719812 /* iconfont.ttf in Resources */,
 				A91B3CFB24D6F3E300097C0D /* lol.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9E50AE724DA6A9500719812 /* PresentIconFont.swift in Sources */,
 				A91B3CE724D4817900097C0D /* ViewController.swift in Sources */,
 				A91B3CE324D4817900097C0D /* AppDelegate.swift in Sources */,
 				A91B3CF924D4995A00097C0D /* PresentationFlexView.swift in Sources */,
