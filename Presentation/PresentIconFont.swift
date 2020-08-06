@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct IcontFont{
+public struct IconFontLoader{
     static public func registerIconFont(name:String,bundle:Bundle?) {
         let b = bundle ?? Bundle.main
         if let u = b.url(forResource: name, withExtension: "ttf"){
@@ -48,11 +48,32 @@ public struct IcontFont{
     }
 }
 
-public class IconFontLayer:CALayer{
-    public var fontName:String = "iconfont"
-    public var fontSize:CGFloat = 40;
-    private var font:UIFont{
-        return UIFont(name: fontName, size: fontSize) ?? UIFont.systemFont(ofSize: self.fontSize)
+public class IconFont{
+    public let fontName:String
+    public var size:CGFloat
+    public var index:UInt16
+    init(size:CGFloat,index:UInt16 = 1,name:String  = "iconfont") {
+        fontName = name
+        self.size = size
+        self.index = index
     }
-    
+    public var font:CTFont {
+        return CTFontCreateWithName(fontName as CFString, size, nil)
+    }
+    public var iconCount:Int {
+        return CTFontGetGlyphCount(font)
+    }
+    public var path:CGPath?{
+        let p = CTFontCreatePathForGlyph(font, CGGlyph(index), nil)
+        return p
+    }
+    public var img:CGImage?{
+        guard let path = self.path else { return nil }
+        let rect = path.boundingBox;
+        
+        return PresentImage(size: rect.size).hasAlpha(alpha: true).hasScale(scale: UIScreen.main.scale).draw { (p) in
+            var point = CGPoint(x: -rect.origin.x, y: -rect.origin.y)
+            CTFontDrawGlyphs(self.font, &self.index, &point, 1, p.context!)
+        }
+    }
 }
