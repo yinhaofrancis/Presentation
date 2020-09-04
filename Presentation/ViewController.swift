@@ -16,25 +16,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        IconFontLoader.registerIconFont(name: "iconfont", bundle: nil)
+        
      
     }
 
     @IBAction func close(_ sender: Any) {
-        if let v = self.storyboard?.instantiateViewController(withIdentifier: "KKK"){
-            self.present(v, animated: true, completion: nil)
+        let a = PresentImage(size: CGSize(width: 300, height: 300)).hasScale(scale: UIScreen.main.scale)
+        a.clearColor = UIColor.red.cgColor
+        if let img = a.draw(call: { (pi) in
+            let font = CTFontCreateWithName("sys" as CFString, 20, nil)
+            #imageLiteral(resourceName: "d").cgImage?.draw(ctx: pi.context!, rect: CGRect(x: 150, y: 150, width: 100, height: 100), rollOver: false)
+            "daas你⛰️".draw(ctx: pi.context!, scale:pi.hasScale, color: UIColor.green.cgColor, font:font,position: CGPoint(x: 150, y: 150))
+            
+        }){
+            let imgv = UIImageView(image: UIImage(cgImage: img, scale: UIScreen.main.scale, orientation: .up))
+            
+            self.img .addArrangedSubview(imgv)
         }
-        self.fontText.text = "\u{e600}\u{e601}\u{e602}\u{e603}\u{e604}\u{e605}\u{e606}\u{e628}"
-        let font = UIFont(name: "iconfont", size: 40);
-        self.fontText.font = font;
-        let f = IconFont(size: 20)
-        for i in (1...100) {
-            f.index = UInt16(i)
-            if let img = f.img{
-                let img = UIImage(cgImage: img, scale: UIScreen.main.scale, orientation: .up)
-                self.img .addArrangedSubview(UIImageView(image: img))
-            }
-        }
+        
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
