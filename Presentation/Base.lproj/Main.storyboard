@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g2c-ky-f37">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g2c-ky-f37">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,36 +16,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rd-t5-nCJ">
-                                <rect key="frame" x="186" y="88" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37d-EC-CLd">
-                                <rect key="frame" x="20" y="297" width="374" height="301"/>
-                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6dk-DP-fFp" customClass="FESpiderView" customModule="Presentation" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="241" width="414" height="414"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="6dk-DP-fFp" secondAttribute="height" id="2qX-8B-Sqd"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padingX">
+                                        <real key="value" value="44"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="2qx-zW-WcZ">
+                                <rect key="frame" x="18" y="700" width="378" height="31"/>
+                                <connections>
+                                    <action selector="change:" destination="BYZ-38-t0r" eventType="valueChanged" id="HEx-AA-WhE"/>
+                                </connections>
+                            </slider>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2Rd-t5-nCJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9AO-7I-3yT"/>
-                            <constraint firstItem="2Rd-t5-nCJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WaE-tQ-2aY"/>
-                            <constraint firstItem="37d-EC-CLd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lnE-LR-I91"/>
-                            <constraint firstItem="37d-EC-CLd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="pIj-Et-54C"/>
+                            <constraint firstItem="6dk-DP-fFp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9i3-Dc-jef"/>
+                            <constraint firstItem="2qx-zW-WcZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="NaJ-4u-ad9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2qx-zW-WcZ" secondAttribute="trailing" constant="20" id="Rwq-U1-TuB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6dk-DP-fFp" secondAttribute="trailing" id="Zfz-uY-vo4"/>
+                            <constraint firstItem="6dk-DP-fFp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="m1h-ab-y1W"/>
+                            <constraint firstItem="2qx-zW-WcZ" firstAttribute="top" secondItem="6dk-DP-fFp" secondAttribute="bottom" constant="45" id="z2w-qy-j4d"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="DvA-J3-3Yt">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="XLc-fH-vOl">
-                            <connections>
-                                <action selector="close:" destination="BYZ-38-t0r" id="EO3-3E-git"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="XLc-fH-vOl"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="fontText" destination="2Rd-t5-nCJ" id="6GQ-3C-BzW"/>
                         <outlet property="fontt" destination="XLc-fH-vOl" id="uFX-w3-ZUs"/>
-                        <outlet property="img" destination="37d-EC-CLd" id="KED-OJ-bhj"/>
+                        <outlet property="sp" destination="6dk-DP-fFp" id="b4U-3C-pPv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

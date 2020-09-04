@@ -10,34 +10,39 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var img: UIStackView!
-    @IBOutlet weak var fontText: UILabel!
+    @IBOutlet weak var sp: FESpiderView!
     @IBOutlet weak var fontt: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let a = FESpiderValue()
+        a.value = [0.3,0.4,0.5,0.6,0.7]
+        a.fill = UIColor.red.withAlphaComponent(0.6)
+        a.color = UIColor.red.withAlphaComponent(0.8)
+        let b = FESpiderValue()
+        b.value = [0.7,0.6,0.5,0.4,0.3]
+        b.fill = UIColor.blue.withAlphaComponent(0.6)
+        b.color = UIColor.blue.withAlphaComponent(0.8)
+        sp.percentValue = [a,b]
+        self.sp .setNeedsDisplay()
      
-    }
-
-    @IBAction func close(_ sender: Any) {
-        let a = PresentImage(size: CGSize(width: 300, height: 300)).hasScale(scale: UIScreen.main.scale)
-        a.clearColor = UIColor.red.cgColor
-        if let img = a.draw(call: { (pi) in
-            let font = CTFontCreateWithName("sys" as CFString, 20, nil)
-            #imageLiteral(resourceName: "d").cgImage?.draw(ctx: pi.context!, rect: CGRect(x: 150, y: 150, width: 100, height: 100), rollOver: false)
-            "daas你⛰️".draw(ctx: pi.context!, scale:pi.hasScale, color: UIColor.green.cgColor, font:font,position: CGPoint(x: 150, y: 150))
-            
-        }){
-            let imgv = UIImageView(image: UIImage(cgImage: img, scale: UIScreen.main.scale, orientation: .up))
-            
-            self.img .addArrangedSubview(imgv)
-        }
-        
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    @IBAction func change(_ sender: UISlider) {
+        let a = FESpiderValue()
+        a.value = [0.3,0.4,0.5,0.6,0.7]
+        a.fill = UIColor.red.withAlphaComponent(0.6)
+        a.color = UIColor.red.withAlphaComponent(0.8)
+        let b = FESpiderValue()
+        b.value = [0.7,0.6,0.5,0.4,0.3]
+        b.fill = UIColor.blue.withAlphaComponent(0.6)
+        b.color = UIColor.blue.withAlphaComponent(0.8)
+        sp.percentValue = [a,b]
+        sp.rotation = CGFloat(sender.value)
+        self.sp .setNeedsDisplay()
+    }
 }
 
