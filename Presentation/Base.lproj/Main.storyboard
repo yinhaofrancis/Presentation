@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g2c-ky-f37">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g2c-ky-f37">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,68 +17,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6dk-DP-fFp" customClass="FESpiderView" customModule="Presentation" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="418" width="414" height="414"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jtv-kP-5CE" customClass="FELineView" customModule="Presentation" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="248.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="6dk-DP-fFp" secondAttribute="height" id="2qX-8B-Sqd"/>
+                                    <constraint firstAttribute="width" secondItem="jtv-kP-5CE" secondAttribute="height" multiplier="10:6" id="LqU-b7-izA"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                        <color key="value" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                        <real key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="padingX">
-                                        <real key="value" value="44"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="2qx-zW-WcZ">
-                                <rect key="frame" x="18" y="832" width="378" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="-10" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="Kzt-lZ-39c">
+                                <rect key="frame" x="8" y="433" width="398" height="31"/>
                                 <connections>
-                                    <action selector="change:" destination="BYZ-38-t0r" eventType="valueChanged" id="HEx-AA-WhE"/>
+                                    <action selector="po:" destination="BYZ-38-t0r" eventType="valueChanged" id="FDJ-zJ-zOr"/>
                                 </connections>
                             </slider>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VxL-Y3-XJc">
-                                <rect key="frame" x="0.0" y="88" width="414" height="233"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="VxL-Y3-XJc" secondAttribute="height" multiplier="16:9" id="tvT-5z-vwy"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="ccv-9F-gmd" kind="embed" id="u38-MO-Pt3"/>
-                                </connections>
-                            </containerView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="VxL-Y3-XJc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0gc-fU-vHH"/>
-                            <constraint firstItem="VxL-Y3-XJc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1fu-3V-mZQ"/>
-                            <constraint firstItem="6dk-DP-fFp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9i3-Dc-jef"/>
-                            <constraint firstItem="VxL-Y3-XJc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IXo-oG-fjJ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2qx-zW-WcZ" secondAttribute="bottom" id="L5d-ag-ARQ"/>
-                            <constraint firstItem="2qx-zW-WcZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="NaJ-4u-ad9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2qx-zW-WcZ" secondAttribute="trailing" constant="20" id="Rwq-U1-TuB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6dk-DP-fFp" secondAttribute="trailing" id="Zfz-uY-vo4"/>
-                            <constraint firstItem="2qx-zW-WcZ" firstAttribute="top" secondItem="6dk-DP-fFp" secondAttribute="bottom" id="z2w-qy-j4d"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jtv-kP-5CE" secondAttribute="trailing" id="Cr2-qD-kX7"/>
+                            <constraint firstItem="Kzt-lZ-39c" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-10" id="FaH-Jd-XHn"/>
+                            <constraint firstItem="jtv-kP-5CE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SSW-mO-CCp"/>
+                            <constraint firstItem="Kzt-lZ-39c" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VtA-lv-ZyB"/>
+                            <constraint firstItem="Kzt-lZ-39c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="hlv-CR-26N"/>
+                            <constraint firstItem="jtv-kP-5CE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="nuO-SK-tiF"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="DvA-J3-3Yt">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="XLc-fH-vOl"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="XLc-fH-vOl">
+                            <connections>
+                                <segue destination="hzj-XU-fWS" kind="show" id="hxz-nk-Fb8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="fontt" destination="XLc-fH-vOl" id="uFX-w3-ZUs"/>
-                        <outlet property="sp" destination="6dk-DP-fFp" id="b4U-3C-pPv"/>
+                        <outlet property="line" destination="jtv-kP-5CE" id="m30-gb-McG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1043" y="-24"/>
+            <point key="canvasLocation" x="1040.5797101449275" y="125.89285714285714"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="9hs-v1-hsH">
@@ -87,7 +66,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3X-Xq-J2b">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3X-Xq-J2b">
                                 <rect key="frame" x="184" y="433" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -95,13 +74,14 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="8La-xF-O8E"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
                             <constraint firstItem="E3X-Xq-J2b" firstAttribute="centerX" secondItem="1QN-eo-R8V" secondAttribute="centerX" id="lPN-go-TCs"/>
                             <constraint firstItem="E3X-Xq-J2b" firstAttribute="centerY" secondItem="1QN-eo-R8V" secondAttribute="centerY" id="uxB-iS-yhQ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="8La-xF-O8E"/>
                     </view>
+                    <navigationItem key="navigationItem" id="tod-nS-ruH"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VEU-dk-48T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -123,22 +103,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXI-WF-6do" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
-        </scene>
-        <!--Live Display View Controller-->
-        <scene sceneID="t4M-Lj-tef">
-            <objects>
-                <viewController id="ccv-9F-gmd" customClass="FELiveDisplayViewController" customModule="Presentation" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8oH-Tn-dN1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="LXF-oH-xXN"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MMc-RC-e69" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1046" y="504"/>
+            <point key="canvasLocation" x="136" y="126"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

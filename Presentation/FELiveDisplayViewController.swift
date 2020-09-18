@@ -225,7 +225,6 @@ import AVKit
         super.viewDidLoad()
         self.view.layer.addSublayer(self.videoLayer)
         self.videoLayer.backgroundColor = UIColor.black.cgColor
-        self.add(url: "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8", name: "a")
         do{
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
             try AVAudioSession.sharedInstance().setCategory(.playback)
@@ -379,10 +378,16 @@ import AVKit
     }
     @objc func toFullscreen(){
         let a = AVPlayerViewController()
-        a.player = self.videoPlayer
-        self.videoLayer.player = nil;
-        self.present(a, animated: true, completion: nil)
+        a.player = AVPlayer(playerItem: self.item)
+        
+
+        self.present(a, animated: true, completion:{
+            a.player?.play()
+        })
+        
+        
     }
+    let item = AVPlayerItem(url: URL(string: "http://hlstct.douyucdn2.cn/dyliveflv3/3921570rlBduDbuc.m3u8?txSecret=bc0f3f1ad19d3ef8e69de2266c6aab77&txTime=5f585ca5&token=cpg-FIVEEPlay-0-3921570-30983e2ca1b09fce6d7f10f424b68a10&did=&origin=ws&vhost=play3&tp=258d5c49")!)
     @objc func toPlay(){
         self.pauseButton.isSelected = !self.pauseButton.isSelected
         if self.videoLayer.player == nil {

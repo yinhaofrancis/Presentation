@@ -17,6 +17,8 @@
 		A923B1A724DC467F009F2EC4 /* PresentImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A923B1A624DC467F009F2EC4 /* PresentImage.swift */; };
 		A93E03A32506069A00FCA6BC /* FELiveDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93E03A22506069A00FCA6BC /* FELiveDisplayViewController.swift */; };
 		A93E03A525061CAA00FCA6BC /* NetworkStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93E03A425061CAA00FCA6BC /* NetworkStateObserver.swift */; };
+		A9BD3BBB251489DE0051A24B /* FELineChatLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BD3BBA251489DE0051A24B /* FELineChatLayer.swift */; };
+		A9BD3BDA2514A1F90051A24B /* FELineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BD3BD92514A1F90051A24B /* FELineView.swift */; };
 		A9BFA45825020B7200C8A196 /* FESpiderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BFA45725020B7200C8A196 /* FESpiderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,8 @@
 		A923B1AB24DC7076009F2EC4 /* iconfont2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont2.ttf; sourceTree = "<group>"; };
 		A93E03A22506069A00FCA6BC /* FELiveDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FELiveDisplayViewController.swift; sourceTree = "<group>"; };
 		A93E03A425061CAA00FCA6BC /* NetworkStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStateObserver.swift; sourceTree = "<group>"; };
+		A9BD3BBA251489DE0051A24B /* FELineChatLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FELineChatLayer.swift; sourceTree = "<group>"; };
+		A9BD3BD92514A1F90051A24B /* FELineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FELineView.swift; sourceTree = "<group>"; };
 		A9BFA45725020B7200C8A196 /* FESpiderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FESpiderView.swift; sourceTree = "<group>"; };
 		A9E50AE624DA6A9500719812 /* PresentIconFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentIconFont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,20 +82,30 @@
 				A923B1A924DC6E68009F2EC4 /* iconfont.ttf */,
 				A923B1AB24DC7076009F2EC4 /* iconfont2.ttf */,
 				A9E50AE624DA6A9500719812 /* PresentIconFont.swift */,
-				A91B3CFE24D9CDA100097C0D /* MVViewController.swift */,
 				A91B3CF624D481BE00097C0D /* DialogPresentation.swift */,
 				A91B3CFC24D9B4CB00097C0D /* DialogTransaction.swift */,
 				A91B3CF824D4995A00097C0D /* PresentationFlexView.swift */,
 				A91B3CFA24D6F3E300097C0D /* lol.xib */,
 				A91B3CEB24D4817A00097C0D /* Assets.xcassets */,
 				A91B3CED24D4817A00097C0D /* LaunchScreen.storyboard */,
+				A91B3CFE24D9CDA100097C0D /* MVViewController.swift */,
 				A91B3CF024D4817A00097C0D /* Info.plist */,
-				A923B1A624DC467F009F2EC4 /* PresentImage.swift */,
-				A9BFA45725020B7200C8A196 /* FESpiderView.swift */,
+				A9BD3BB9251489A10051A24B /* Present */,
 				A93E03A22506069A00FCA6BC /* FELiveDisplayViewController.swift */,
 				A93E03A425061CAA00FCA6BC /* NetworkStateObserver.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		A9BD3BB9251489A10051A24B /* Present */ = {
+			isa = PBXGroup;
+			children = (
+				A9BD3BBA251489DE0051A24B /* FELineChatLayer.swift */,
+				A9BFA45725020B7200C8A196 /* FESpiderView.swift */,
+				A923B1A624DC467F009F2EC4 /* PresentImage.swift */,
+				A9BD3BD92514A1F90051A24B /* FELineView.swift */,
+			);
+			path = Present;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,9 +182,11 @@
 			files = (
 				A9BFA45825020B7200C8A196 /* FESpiderView.swift in Sources */,
 				A923B1A724DC467F009F2EC4 /* PresentImage.swift in Sources */,
+				A9BD3BDA2514A1F90051A24B /* FELineView.swift in Sources */,
 				A93E03A525061CAA00FCA6BC /* NetworkStateObserver.swift in Sources */,
 				A93E03A32506069A00FCA6BC /* FELiveDisplayViewController.swift in Sources */,
 				A91B3CE724D4817900097C0D /* ViewController.swift in Sources */,
+				A9BD3BBB251489DE0051A24B /* FELineChatLayer.swift in Sources */,
 				A91B3CE324D4817900097C0D /* AppDelegate.swift in Sources */,
 				A91B3CFF24D9CDA100097C0D /* MVViewController.swift in Sources */,
 			);

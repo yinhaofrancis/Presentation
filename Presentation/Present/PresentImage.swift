@@ -9,14 +9,16 @@ import ImageIO
 import QuartzCore
 import MobileCoreServices
 import CoreText
-
+import UIKit
 public final class PresentImage{
     public typealias PresentDrawCall = (PresentImage)->Void
     
     public private(set) lazy var context:CGContext? = {
         let ctx = CGContext(data: nil, width: Int(self.size.width * self.hasScale), height: Int(self.size.height * self.hasScale), bitsPerComponent: 8, bytesPerRow: 0, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: self.hasAlpha ? CGImageAlphaInfo.premultipliedLast.rawValue : CGImageAlphaInfo.noneSkipLast.rawValue)
-        ctx?.scaleBy(x: 1, y: -1)
-        ctx?.translateBy(x: 0, y: -CGFloat(ctx?.height ?? 0))
+        if self.top{
+            ctx?.scaleBy(x: 1, y: -1)
+            ctx?.translateBy(x: 0, y: -CGFloat(ctx?.height ?? 0))
+        }
         ctx?.scaleBy(x: self.hasScale, y: self.hasScale)
         return ctx
     }()
@@ -28,7 +30,10 @@ public final class PresentImage{
     
     public var clearColor:CGColor?
     
-    public init(size:CGSize){
+    private var top:Bool = false
+    
+    public init(size:CGSize,topStart:Bool = false){
+        self.top = topStart
         self.size = size
     }
     public func hasAlpha(alpha:Bool)->Self {
@@ -92,7 +97,14 @@ extension String{
         }
     }
     public func attributeString(color:CGColor,font:CTFont)->CFAttributedString?{
-        guard let att = CFAttributedStringCreate(kCFAllocatorDefault, self as CFString, [kCTFontAttributeName:font,kCTForegroundColorAttributeName:color] as CFDictionary) else {
+        let s = NSMutableParagraphStyle()
+        s.alignment = .center
+        s.lineSpacing = 0
+        guard let att = CFAttributedStringCreate(kCFAllocatorDefault, self as CFString, [
+            kCTFontAttributeName:font,
+            kCTForegroundColorAttributeName:color,
+            kCTParagraphStyleAttributeName:s
+            ] as CFDictionary) else {
             return nil
         }
         return att
@@ -102,10 +114,16 @@ extension String{
 extension CFAttributedString {
     
     public var bound:CGRect{
-        return CTLineGetImageBounds(self.line, nil)
+        let size = CTFramesetterSuggestFrameSizeWithConstraints(self.frameset,CFRangeMake(0, CFAttributedStringGetLength(self)), nil, CGSize(width: CGFloat.infinity, height: .infinity), nil)
+        return CGRect(x: 0, y: 0, width: size.width, height: size.height)
     }
-    public var line:CTLine{
-        return CTLineCreateWithAttributedString(self)
+    public func makeframe(transform:CGAffineTransform)->CTFrame{
+        let set = self.frameset
+        let path = CGPath(rect: self.bound.applying(transform), transform: nil)
+        return CTFramesetterCreateFrame(set, CFRangeMake(0, CFAttributedStringGetLength(self)), path, nil)
+    }
+    public var frameset:CTFramesetter{
+        return CTFramesetterCreateWithAttributedString(self)
     }
     public func draw(ctx:CGContext,scale:CGFloat,position:CGPoint,horizontal:drawAlign,vertical:drawAlign,rollOver:Bool){
         ctx.saveGState()
@@ -132,10 +150,27 @@ extension CFAttributedString {
             drawPosition.y = position.y - self.bound.origin.y
             break;
         }
-        ctx.textMatrix = CGAffineTransform(translationX: drawPosition.x, y: drawPosition.y).scaledBy(x: 1, y: -1).translatedBy(x: 0, y: -self.bound.maxY);
+        ctx.textPosition = drawPosition;
+        if rollOver{
+            ctx.textMatrix = CGAffineTransform(translationX: drawPosition.x, y: drawPosition.y).scaledBy(x: 1, y: -1).translatedBy(x: 0, y: -self.bound.maxY);
+        }
         
-        let line = CTLineCreateWithAttributedString(self)
-        CTLineDraw(line, ctx);
+        
+        var frame = self.makeframe(transform: ctx.textMatrix);
+        let lines = CTFrameGetLines(frame) as! Array<CTLine>
+        if(lines.count > 0){
+            var ascent:CGFloat = 0.0
+            var descent:CGFloat = 0.0
+            var leading:CGFloat = 0.0
+            CTLineGetTypographicBounds(lines.first!, &ascent, &descent, &leading)
+            if rollOver{
+                ctx.textMatrix = CGAffineTransform(translationX: drawPosition.x, y: drawPosition.y).scaledBy(x: 1, y: -1).translatedBy(x: 0, y: -self.bound.maxY);
+            }
+            frame = self.makeframe(transform: ctx.textMatrix);
+        }
+        
+        
+        CTFrameDraw(frame, ctx)
         ctx.restoreGState()
     }
 }

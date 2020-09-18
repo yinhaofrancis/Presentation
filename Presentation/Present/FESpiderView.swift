@@ -8,21 +8,27 @@
 
 import UIKit
 public class FESpiderValue:NSObject{
-    var value:[CGFloat] = []
-    var color:UIColor = UIColor.white
-    var fill:UIColor = UIColor.white
-    var index:Int = 0
+    @objc public var value:[CGFloat] = []
+    @objc public var color:UIColor = UIColor.white
+    @objc public var fill:UIColor = UIColor.white
+    @objc public var index:Int = 0
 }
 public class FESpiderView:UIView {
-    public var titles:[String] = ["Rating","Rating","Rating","Rating","Rating"]
+    @objc public var titles:[String] = ["Rating","Rating","Rating","Rating","Rating"]
     @IBInspectable public var step:Int = 5
     @IBInspectable public var rotation:CGFloat = -CGFloat.pi / 2
     @IBInspectable public var lineColor:UIColor = UIColor.black
     @IBInspectable public var textColor:UIColor = UIColor.red
     @IBInspectable public var fontSize:CGFloat = 10
     @IBInspectable public var padingX:CGFloat = 60
+    let numberFormat:NumberFormatter = {
+        let nf = NumberFormatter()
+        nf.maximumFractionDigits = 0
+        nf.numberStyle = .percent;
+        return nf
+    }()
     var layers:[CAShapeLayer] = []
-    public var percentValue:[FESpiderValue] = []
+    @objc public var percentValue:[FESpiderValue] = []
     func drawSpider(ctx:CGContext,frame:CGRect){
         ctx.saveGState()
         let perangle = CGFloat.pi * 2 / CGFloat(titles.count)
@@ -35,12 +41,18 @@ public class FESpiderView:UIView {
             ctx.move(to: .zero)
             ctx.addLine(to: CGPoint(x: frame.size.width / 2,y:0))
             ctx.rotate(by: perangle)
+            ctx.strokePath()
         }
         ctx.restoreGState()
         var a = CGAffineTransform(rotationAngle: rotation);
-        for i in titles {
-            let p = CGPoint(x: frame.size.width / 2 + 20,y:0).applying(a)
-            i.draw(ctx: ctx, scale: UIScreen.main.scale, color: self.textColor.cgColor, font: CTFontCreateWithName("" as CFString, fontSize, nil), position: p)
+        for i in 0..<titles.count {
+            let p = CGPoint(x: frame.size.width / 2 + 28,y:0).applying(a)
+            if(self.percentValue.count > 0){
+                let ii = "\(self.number(v:self.percentValue[0].value[i] / CGFloat(self.step + 1) ))\n" + "\(titles[i])"
+                ii.draw(ctx: ctx, scale: UIScreen.main.scale, color: self.textColor.cgColor, font: CTFontCreateWithName("" as CFString, fontSize, nil), position: p)
+            }else{
+                titles[i].draw(ctx: ctx, scale: UIScreen.main.scale, color: self.textColor.cgColor, font: CTFontCreateWithName("" as CFString, fontSize, nil), position: p)
+            }
             a = a.rotated(by: perangle)
         }
         for i in 1 ... self.step {
@@ -60,11 +72,17 @@ public class FESpiderView:UIView {
         for i in 0..<self.percentValue.count {
             let value = self.percentValue[i]
             let layer = self.createLayer(value: i)
-            layer.path = self.createShape(values:value.value , max: frame.width / 2, rotation: self.rotation, perangle: perangle, space: self.bounds)
+            layer.path = self.createShape(values:value.value , max: frame.width / 2 / CGFloat(self.step + 1), rotation: self.rotation, perangle: perangle, space: self.bounds)
             layer.frame = self.bounds
             layer.fillColor = value.fill.cgColor
             layer.strokeColor = value.color.cgColor
+            
         }
+    }
+    func number(v:CGFloat)->String{
+        let number = NSNumber(value: Double(v))
+        print(v)
+        return self.numberFormat.string(from: number) ?? "0%"
     }
     public override func draw(_ rect: CGRect) {
         self.drawSpider(ctx: UIGraphicsGetCurrentContext()!, frame: rect.insetBy(dx: self.padingX, dy: self.padingX))

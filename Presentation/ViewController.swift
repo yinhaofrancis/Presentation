@@ -10,39 +10,33 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var sp: FESpiderView!
+    @IBOutlet weak var line: FELineView!
     @IBOutlet weak var fontt: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let a = FESpiderValue()
-        a.value = [0.3,0.4,0.5,0.6,0.7]
-        a.fill = UIColor.red.withAlphaComponent(0.6)
-        a.color = UIColor.red.withAlphaComponent(0.8)
-        let b = FESpiderValue()
-        b.value = [0.7,0.6,0.5,0.4,0.3]
-        b.fill = UIColor.blue.withAlphaComponent(0.6)
-        b.color = UIColor.blue.withAlphaComponent(0.8)
-        sp.percentValue = [a,b]
-        self.sp .setNeedsDisplay()
+        
+        
      
     }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    @IBAction func change(_ sender: UISlider) {
-        let a = FESpiderValue()
-        a.value = [0.3,0.4,0.5,0.6,0.7]
-        a.fill = UIColor.red.withAlphaComponent(0.6)
-        a.color = UIColor.red.withAlphaComponent(0.8)
-        let b = FESpiderValue()
-        b.value = [0.7,0.6,0.5,0.4,0.3]
-        b.fill = UIColor.blue.withAlphaComponent(0.6)
-        b.color = UIColor.blue.withAlphaComponent(0.8)
-        sp.percentValue = [a,b]
-        sp.rotation = CGFloat(sender.value)
-        self.sp .setNeedsDisplay()
+    @IBAction func po(_ sender: UISlider) {
+        let f = FELineChatLayerConfigration()
+        f.axisXValue = ["ddd","一啊"]
+        f.axisYValue = ["ddd","一啊"]
+        f.zeroString = "开始"
+        f.backgroundColor = UIColor.green
+        f.axisLineColor = UIColor.systemGreen
+        
+        let v = FELineChatValue()
+        
+        for i in 0 ..< 1000 {
+            v.value.append((sin(CGFloat(i) / 10 * CGFloat(sender.value)) + 1) / 2)
+        }
+        
+        v.valueLineColor = UIColor.systemPink;
+        f.values.append(v)
+        f.size = CGSize(width: 300, height: 180)
+        self.line.lineLayer.configration = f;
     }
 }
 
