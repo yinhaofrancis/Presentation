@@ -88,34 +88,38 @@ import UIKit
                     
                     s.loadValues(config: config, index: i, ctx: ctx)
                 }
-                for i  in 0...config.axisXValue.count {
-                    var v = CGPoint(x: s.leftPadding, y: s.bottomPadding)
-                    v.x += (s.xStep * CGFloat(i))
-                    p.context?.move(to:v)
-                    v.y -= 3
-                    p.context?.addLine(to:v)
-                    p.context?.strokePath()
-                    v.y -= 3
-                    if(i > 0){
-                        let str = config.axisXValue[i - 1].attributeString(color: config.axisLineColor.cgColor, font: CTFontCreateWithName("" as CFString, config.fontsize, nil))
-                        str?.draw(ctx: ctx, scale: UIScreen.main.scale, position: v, horizontal: .center, vertical: .trailing, rollOver: false)
+                if(config.axisXValue.count > 0){
+                    for i  in 1...config.axisXValue.count {
+                        var v = CGPoint(x: s.leftPadding, y: s.bottomPadding)
+                        v.x += (s.xStep * CGFloat(i))
+                        p.context?.move(to:v)
+                        v.y -= 3
+                        p.context?.addLine(to:v)
+                        p.context?.strokePath()
+                        v.y -= 3
+                        if(i > 0){
+                            let str = config.axisXValue[i - 1].attributeString(color: config.axisLineColor.cgColor, font: CTFontCreateWithName("" as CFString, config.fontsize, nil))
+                            str?.draw(ctx: ctx, scale: UIScreen.main.scale, position: v, horizontal: .center, vertical: .trailing, rollOver: false)
+                        }
                     }
                 }
-                for i  in 0...config.axisYValue.count {
-                    var v = CGPoint(x: s.leftPadding, y: s.bottomPadding)
-                    v.y += (s.yStep * CGFloat(i))
-                    p.context?.move(to:v)
-                    v.x -= 3
-                    p.context?.addLine(to:v)
-                    p.context?.strokePath()
-                    v.x -= 3;
-                    if(i > 0){
-                        let str = config.axisYValue[i - 1].attributeString(color: config.axisLineColor.cgColor, font: CTFontCreateWithName("" as CFString, config.fontsize, nil))
-                        
-                        str?.draw(ctx: ctx, scale: UIScreen.main.scale, position: v, horizontal: .trailing, vertical: .center, rollOver: false)
+                if(config.axisYValue.count > 0){
+                    for i  in 1...config.axisYValue.count {
+                        var v = CGPoint(x: s.leftPadding, y: s.bottomPadding)
+                        v.y += (s.yStep * CGFloat(i))
+                        p.context?.move(to:v)
+                        v.x -= 3
+                        p.context?.addLine(to:v)
+                        p.context?.strokePath()
+                        v.x -= 3;
+                        if(i > 0){
+                            let str = config.axisYValue[i - 1].attributeString(color: config.axisLineColor.cgColor, font: CTFontCreateWithName("" as CFString, config.fontsize, nil))
+                            
+                            str?.draw(ctx: ctx, scale: UIScreen.main.scale, position: v, horizontal: .trailing, vertical: .center, rollOver: false)
+                        }
                     }
                 }
-                if let ctx = p.context{
+                if let ctx = p.context, config.axisXValue.count > 0{
                     config.zeroString.attributeString(color: config.axisLineColor.cgColor, font: CTFontCreateWithName("" as CFString, config.fontsize, nil))?.draw(ctx: ctx, scale: UIScreen.main.scale, position: CGPoint(x: s.leftPadding, y: s.bottomPadding), horizontal: .trailing, vertical: .trailing, rollOver: false)
                 }
             }

@@ -21,16 +21,16 @@ class ViewController: UIViewController {
     }
     @IBAction func po(_ sender: UISlider) {
         let f = FELineChatLayerConfigration()
-        f.axisXValue = ["ddd","一啊"]
-        f.axisYValue = ["ddd","一啊"]
-        f.zeroString = "开始"
+        f.axisXValue = ["0","PI"]
+        f.axisYValue = ["0.5","1"]
+        f.zeroString = "0"
         f.backgroundColor = UIColor.green
         f.axisLineColor = UIColor.systemGreen
         
         let v = FELineChatValue()
         
         for i in 0 ..< 1000 {
-            v.value.append((sin(CGFloat(i) / 10 * CGFloat(sender.value)) + 1) / 2)
+            v.value.append((sin(CGFloat(i) / 600 * CGFloat(sender.value)) * cos(CGFloat(i) / 600 * CGFloat(sender.value)) + 1) / 2)
         }
         
         v.valueLineColor = UIColor.systemPink;

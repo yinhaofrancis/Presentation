@@ -14,7 +14,10 @@ import AVKit
     
     var netState:NetworkStateObserver?
     let videoLayer:AVPlayerLayer = AVPlayerLayer()
-    
+    var currentPlay:URL?
+    var hasPlay:Bool = false
+    var videoPlayer:AVPlayer = AVPlayer()
+    public var mobileNetPay:Bool = false
     lazy var pauseImage: UIImage = {
         let pimg = PresentImage(size: CGSize(width: 13, height: 17)).hasScale(scale: UIScreen.main.scale).hasAlpha(alpha: true)
         let img = pimg.draw { (pi) in
@@ -217,10 +220,7 @@ import AVKit
             
         return load
         }()
-    var videoPlayer:AVPlayer?
-    public var mobileNetPay:Bool = false
-    var urls:[String:URL] = [:]
-    public private(set) var urlChanel:String = ""
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layer.addSublayer(self.videoLayer)
@@ -229,7 +229,7 @@ import AVKit
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
             try AVAudioSession.sharedInstance().setCategory(.playback)
         }catch{
-            
+
         }
         self.view.addSubview(self.pauseButton)
         let a = [self.pauseButton.leftAnchor.constraint(equalTo: self.view.leftAnchor),
@@ -255,53 +255,63 @@ import AVKit
         self.view.bringSubviewToFront(self.pauseButton)
         self.view.bringSubviewToFront(self.fullScreemButton)
     }
-    public override func viewWillAppear(_ animated: Bool) {
-        if(self.videoPlayer != nil && self.videoLayer.player == nil) {
-            self.videoLayer.player = self.videoPlayer
-            self.videoPlayer?.pause()
-            self.pauseButton.isSelected = false
+    public override func viewDidAppear(_ animated: Bool) {
+         super.viewDidAppear(animated)
+        DispatchQueue.main.async {
+            if(self.netState?.netState == .some(.WiFi) || self.mobileNetPay){
+                self.playVideo()
+            }
         }
     }
-    @objc public func add(url:String?,name:String?){
-        if let us = url, let n = name{
+    @objc public func add(url:String?){
+        if let us = url{
             if let rurl = URL(string: us){
-                self.urls[n] = rurl;
-                if(self.urlChanel.count == 0){
-                    self.urlChanel = n
-                }
                 self.play(rurl: rurl)
+                self.currentPlay = rurl
             }
         }
     }
-    func observerPlayer(play:AVPlayer){
-        play.addObserver(self, forKeyPath: "status", options: .new, context: nil)
-    }
-    func removePlayer(play:AVPlayer?){
-        play?.removeObserver(self, forKeyPath: "status")
-        self.videoPlayer = nil
-        self.videoLayer.player = nil
-    }
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if(context == nil){
-            if(keyPath == "status"){
-                if let vp = self.videoPlayer{
-                    if(vp.status == .readyToPlay){
-                        self.stopLoading()
-                        self.playVideo()
-                    }
-                }
-            }
-        }
-    }
-   
     func play(rurl:URL){
         observerUrl(rurl: rurl)
         if(self.netState?.netState == .some(.WiFi) || self.mobileNetPay){
-            videoPlayer = AVPlayer(url: rurl)
             self.startLoading()
-            self.videoLayer.player = self.videoPlayer
-            if let p = self.videoPlayer {
-                self.observerPlayer(play: p)
+            
+            let a = AVURLAsset(url: rurl)
+            a.resourceLoader.preloadsEligibleContentKeys = true
+            a.loadValuesAsynchronously(forKeys: ["playable"]) { [weak self] in
+                var error: NSError? = nil
+                let status = a.statusOfValue(forKey: "playable", error: &error)
+                DispatchQueue.main.async {
+                    self?.stopLoading()
+                    switch status {
+                    case .loaded:
+                        print("loaded")
+        
+                    case .failed:
+                        print("failed")
+                        return
+                    case .cancelled:
+                        print("failed")
+                        return
+                    default:
+                        print("default")
+                        return
+                        
+                    }
+                    if(a.isPlayable){
+                        
+                        let pi = AVPlayerItem(asset: a)
+                        self?.videoPlayer.replaceCurrentItem(with: pi)
+                        self?.loadObserver()
+                        self?.videoLayer.player = self?.videoPlayer
+                        self?.videoLayer.videoGravity = .resize
+                        self?.playVideo()
+                        self?.hasPlay = true;
+                    }else{
+                        print("can not play");
+                    }
+                    
+                }
             }
         }else if self.netState?.netState == .some(.other){
             self.loadNetwork4G()
@@ -317,18 +327,18 @@ import AVKit
         }
         
         self.netState = NetworkStateObserver(url: rurl, change: { [weak self] (s) in
-            if self?.videoPlayer?.status == .readyToPlay && s == .WiFi{
+            if self?.videoPlayer.status == .readyToPlay && s == .WiFi{
                 self?.playVideo()
-            }else if self?.videoPlayer?.status == .readyToPlay && s == .other{
+            }else if self?.videoPlayer.status == .readyToPlay && s == .other{
                 if self?.mobileNetPay == true{
                     self?.playVideo()
                 }else{
                     self?.loadNetwork4G()
-                    self?.videoPlayer?.pause()
+                    self?.videoPlayer.pause()
                 }
             }else if s == .Noreach{
                 self?.loadNetworkFail()
-                self?.videoPlayer?.pause()
+                self?.videoPlayer.pause()
             }else{
                 
             }
@@ -358,18 +368,16 @@ import AVKit
     func stopLoading(){
         self.loadingView.removeFromSuperview()
     }
-    func playVideo(){
-
-        self.videoPlayer?.play()
+    @objc func playVideo(){
+        self.videoLayer.player = self.videoPlayer;
+        self.videoPlayer.play()
         self.pauseButton.isSelected = true
         self.removeNetworkFail()
         self.removeNetwork4G()
     }
     @objc func reload(){
-        self.startLoading()
         self.removeNetworkFail()
-        self.removePlayer(play: self.videoPlayer)
-        if let u = self.urls[self.urlChanel]{
+        if let u = self.currentPlay{
            self.play(rurl: u)
         }
     }
@@ -378,26 +386,19 @@ import AVKit
     }
     @objc func toFullscreen(){
         let a = AVPlayerViewController()
-        a.player = AVPlayer(playerItem: self.item)
-        
-
-        self.present(a, animated: true, completion:{
-            a.player?.play()
-        })
-        
-        
+        a.player = self.videoPlayer
+        self.present(a, animated: true, completion: nil)
     }
-    let item = AVPlayerItem(url: URL(string: "http://hlstct.douyucdn2.cn/dyliveflv3/3921570rlBduDbuc.m3u8?txSecret=bc0f3f1ad19d3ef8e69de2266c6aab77&txTime=5f585ca5&token=cpg-FIVEEPlay-0-3921570-30983e2ca1b09fce6d7f10f424b68a10&did=&origin=ws&vhost=play3&tp=258d5c49")!)
     @objc func toPlay(){
         self.pauseButton.isSelected = !self.pauseButton.isSelected
         if self.videoLayer.player == nil {
             self.videoLayer.player = self.videoPlayer
         }
         if(self.pauseButton.isSelected){
-            self.videoPlayer?.play()
+            self.videoPlayer.play()
             
         }else{
-            self.videoPlayer?.pause()
+            self.videoPlayer.pause()
         }
         
     }
@@ -406,5 +407,32 @@ import AVKit
         self.mobileNetPay = true
         self.removeNetwork4G()
         self.reload()
+    }
+    func loadObserver(){
+        self.addObserver(self, forKeyPath: "videoPlayer.currentItem.isPlaybackBufferEmpty", options: [.new,.initial], context: nil)
+    }
+    func removeObserver(){
+        if self.hasPlay {
+            self.removeObserver(self, forKeyPath: "videoPlayer.currentItem.isPlaybackBufferEmpty")
+        }
+    }
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if(keyPath == "videoPlayer.currentItem.isPlaybackBufferEmpty") {
+            if let c = self.videoPlayer.currentItem{
+                if(c.isPlaybackBufferEmpty){
+                    self.startLoading()
+                }else{
+                    self.stopLoading()
+                }
+            }else{
+                self.startLoading()
+            }
+        }else{
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+        
+    }
+    deinit {
+        self.removeObserver()
     }
 }

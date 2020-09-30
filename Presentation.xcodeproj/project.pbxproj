@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A907B70F2518A4EC00D405B9 /* PacketTunnelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A907B70E2518A4EC00D405B9 /* PacketTunnelProvider.m */; };
+		A907B7142518A4EC00D405B9 /* vps.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A907B70B2518A4EC00D405B9 /* vps.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A91B3CE324D4817900097C0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91B3CE224D4817900097C0D /* AppDelegate.swift */; };
 		A91B3CE724D4817900097C0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91B3CE624D4817900097C0D /* ViewController.swift */; };
 		A91B3CEA24D4817900097C0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A91B3CE824D4817900097C0D /* Main.storyboard */; };
@@ -22,7 +24,36 @@
 		A9BFA45825020B7200C8A196 /* FESpiderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BFA45725020B7200C8A196 /* FESpiderView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A907B7122518A4EC00D405B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A91B3CD724D4817800097C0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A907B70A2518A4EC00D405B9;
+			remoteInfo = vps;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A907B7152518A4EC00D405B9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A907B7142518A4EC00D405B9 /* vps.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		A907B70B2518A4EC00D405B9 /* vps.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = vps.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A907B70D2518A4EC00D405B9 /* PacketTunnelProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PacketTunnelProvider.h; sourceTree = "<group>"; };
+		A907B70E2518A4EC00D405B9 /* PacketTunnelProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PacketTunnelProvider.m; sourceTree = "<group>"; };
+		A907B7102518A4EC00D405B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A907B7112518A4EC00D405B9 /* vps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = vps.entitlements; sourceTree = "<group>"; };
 		A91B3CDF24D4817900097C0D /* Presentation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Presentation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91B3CE224D4817900097C0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A91B3CE624D4817900097C0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +78,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A907B7082518A4EC00D405B9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A91B3CDC24D4817900097C0D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -57,10 +95,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A907B70C2518A4EC00D405B9 /* vps */ = {
+			isa = PBXGroup;
+			children = (
+				A907B70D2518A4EC00D405B9 /* PacketTunnelProvider.h */,
+				A907B70E2518A4EC00D405B9 /* PacketTunnelProvider.m */,
+				A907B7102518A4EC00D405B9 /* Info.plist */,
+				A907B7112518A4EC00D405B9 /* vps.entitlements */,
+			);
+			path = vps;
+			sourceTree = "<group>";
+		};
 		A91B3CD624D4817800097C0D = {
 			isa = PBXGroup;
 			children = (
 				A91B3CE124D4817900097C0D /* Presentation */,
+				A907B70C2518A4EC00D405B9 /* vps */,
 				A91B3CE024D4817900097C0D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				A91B3CDF24D4817900097C0D /* Presentation.app */,
+				A907B70B2518A4EC00D405B9 /* vps.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,6 +162,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A907B70A2518A4EC00D405B9 /* vps */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A907B7182518A4EC00D405B9 /* Build configuration list for PBXNativeTarget "vps" */;
+			buildPhases = (
+				A907B7072518A4EC00D405B9 /* Sources */,
+				A907B7082518A4EC00D405B9 /* Frameworks */,
+				A907B7092518A4EC00D405B9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vps;
+			productName = vps;
+			productReference = A907B70B2518A4EC00D405B9 /* vps.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A91B3CDE24D4817900097C0D /* Presentation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A91B3CF324D4817A00097C0D /* Build configuration list for PBXNativeTarget "Presentation" */;
@@ -118,10 +186,12 @@
 				A91B3CDB24D4817900097C0D /* Sources */,
 				A91B3CDC24D4817900097C0D /* Frameworks */,
 				A91B3CDD24D4817900097C0D /* Resources */,
+				A907B7152518A4EC00D405B9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A907B7132518A4EC00D405B9 /* PBXTargetDependency */,
 			);
 			name = Presentation;
 			productName = Presentation;
@@ -138,6 +208,9 @@
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = "hao yin";
 				TargetAttributes = {
+					A907B70A2518A4EC00D405B9 = {
+						CreatedOnToolsVersion = 12.0;
+					};
 					A91B3CDE24D4817900097C0D = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -157,11 +230,19 @@
 			projectRoot = "";
 			targets = (
 				A91B3CDE24D4817900097C0D /* Presentation */,
+				A907B70A2518A4EC00D405B9 /* vps */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A907B7092518A4EC00D405B9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A91B3CDD24D4817900097C0D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -176,6 +257,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A907B7072518A4EC00D405B9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A907B70F2518A4EC00D405B9 /* PacketTunnelProvider.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A91B3CDB24D4817900097C0D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -193,6 +282,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A907B7132518A4EC00D405B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A907B70A2518A4EC00D405B9 /* vps */;
+			targetProxy = A907B7122518A4EC00D405B9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A91B3CE824D4817900097C0D /* Main.storyboard */ = {
@@ -214,6 +311,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A907B7162518A4EC00D405B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = vps/vps.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W8LHF9DL7C;
+				INFOPLIST_FILE = vps/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yinhao.Presentation.vps;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A907B7172518A4EC00D405B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = vps/vps.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W8LHF9DL7C;
+				INFOPLIST_FILE = vps/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yinhao.Presentation.vps;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A91B3CF124D4817A00097C0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -369,6 +508,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A907B7182518A4EC00D405B9 /* Build configuration list for PBXNativeTarget "vps" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A907B7162518A4EC00D405B9 /* Debug */,
+				A907B7172518A4EC00D405B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A91B3CDA24D4817800097C0D /* Build configuration list for PBXProject "Presentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
